@@ -35,6 +35,7 @@ export CLUSTER_HOST=$1
 export METRICS_PORT=$2
 export HADOOP_NAME_IN_ZABBIX=$3
 export MONITOR_TYPE=$4
+export PATH=$PATH:/usr/local/zabbix/bin/
 
 #--------------------------------------------------------------------------------------------
 # Set the data output file and the log fle from zabbix_sender
@@ -56,6 +57,7 @@ python `dirname $0`/zabbix-hadoop.py $CLUSTER_HOST $METRICS_PORT $DATA_FILE $HAD
 #--------------------------------------------------------------------------------------------
 # Check the size of $DATA_FILE. If it is not empty, use zabbix_sender to send data to Zabbix.
 #--------------------------------------------------------------------------------------------
+echo $LOG_FILE
 if [[ -s $DATA_FILE ]]
 then
    zabbix_sender -vv -z 127.0.0.1 -i $DATA_FILE 2>>$LOG_FILE 1>>$LOG_FILE

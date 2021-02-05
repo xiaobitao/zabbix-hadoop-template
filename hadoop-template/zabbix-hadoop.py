@@ -5,6 +5,7 @@ import urllib
 import logging
 import sys
 import time
+import socket
 
 # ---------------------------------
 # Generate URL
@@ -57,7 +58,13 @@ def load_url_as_dictionary(url):
 def json_processing(server_name, listen_port, monitor_type):
 
     namenode_dict = {}
-
+    print(server_name)
+    print(listen_port)
+    print(monitor_type)
+    hostname = socket.gethostname()
+    local_ip = socket.gethostbyname(hostname)
+    # print(hostname)
+    print(local_ip)
     jvm_json = load_url_as_dictionary(
         get_url(server_name, listen_port, "service=NameNode,name=JvmMetrics"))
     nns_json = load_url_as_dictionary(
@@ -101,7 +108,9 @@ def json_processing(server_name, listen_port, monitor_type):
         namenode_dict['under_replicated_blocks'] = fsns_json['beans'][0]['UnderReplicatedBlocks']
 
         # NameNodeInfo
-        namenode_dict['files_and_directorys'] = nninfo_json['beans'][0]['TotalFiles']
+        print(nninfo_json)
+        # namenode_dict['files_and_directorys'] = nninfo_json['beans'][0]['TotalFiles']
+        namenode_dict['files_and_directorys'] = 0
         namenode_dict['blocks'] = nninfo_json['beans'][0]['TotalBlocks']
         namenode_dict['configured_capacity'] = nninfo_json['beans'][0]['Total']
         namenode_dict['dfs_used'] = nninfo_json['beans'][0]['Used']
@@ -165,6 +174,7 @@ def json_processing(server_name, listen_port, monitor_type):
 
 def write_data_to_file(json, file_path, hadoop_name_in_zabbix):
     txt_file = open(file_path, 'w+')
+    print(file_path)
     for keys in json:
         txt_file.writelines(hadoop_name_in_zabbix + ' ' +
                             str(keys) + ' ' + str(json[keys]) + '\n')
