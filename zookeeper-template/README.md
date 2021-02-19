@@ -11,6 +11,8 @@
 > {$ZK_PORT} 默认为`2181`
 
 然后上传**userparameter_zkstat.conf**文件到Zookeeper主机上存放Zabbix-agentd自定义参数的文件夹中。
+不是zabbix服务端的，上传之后，服务重启。
+命令行在conf文件里面，将zkStat转义为一个shell命令
 
 完成！
 
