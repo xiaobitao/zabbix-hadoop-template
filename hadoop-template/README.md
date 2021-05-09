@@ -13,7 +13,7 @@
 
 `HADOOP_NAMENODE_METRICS_PORT` 设置正确才能执行
 
-然后上传剩余的两个脚本文件到Zabbix Server主机上存放Zabbix外部脚本的文件夹（默认为`/usr/local/share/zabbix/externalscripts/`）中，并使用`chmod +x`赋予脚本文件可执行权限。
+然后上传剩余的两个脚本文件到Zabbix Server主机上存放Zabbix外部脚本的文件夹（默认为`/usr/local/share/zabbix/externalscripts/`, 自动安装为`/usr/lib/zabbix/externalscripts`）中，并使用`chmod +x`赋予脚本文件可执行权限。
 
 完成！
 
